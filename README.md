@@ -1,4 +1,4 @@
-# SynchronizerTokenPattern
+# Synchronizer Token Pattern
 Repository includes how to use Synchronize Token Pattern in an Angular & Node.Js environment.
 ## Installation
 * clone the repository to you local machine
