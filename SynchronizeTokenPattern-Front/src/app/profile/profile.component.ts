@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 @Component({
   selector: 'app-profile',
@@ -9,8 +9,8 @@ import { CookieService } from 'ngx-cookie-service';
 export class ProfileComponent implements OnInit {
 
   constructor(private http: HttpClient, private cookieService: CookieService) { }
-  fundjson = {csrf: '', amount: 0};
-  cookieValue= '';
+  profile = { csrf: '', firstName: '', lastName: '', address: '', email: '', };
+  cookieValue = '';
   response;
   ngOnInit() {
     this.cookieValue = this.cookieService.get('SessionID');
@@ -18,25 +18,28 @@ export class ProfileComponent implements OnInit {
       console.log(data);
       let response;
       response = data;
-      this.fundjson.csrf = response.csrf; 
+      this.profile.csrf = response.csrf;
     });
   }
 
-  transfer() {
-    this.http.post('http://localhost:3000/transfer', {
-      amount: this.fundjson.amount,
-      token: this.fundjson.csrf
-    }, {headers: new HttpHeaders().set('SID', this.cookieValue)}).subscribe(
+  submit() {
+    this.http.post('http://localhost:3000/profile', {
+      firstName: this.profile.firstName,
+      lastName: this.profile.lastName,
+      address: this.profile.address,
+      email: this.profile.email,
+      token: this.profile.csrf
+    }, { headers: new HttpHeaders().set('SID', this.cookieValue) }).subscribe(
       res => {
         let data;
         data = res
-          this.response = data.result;
-          console.log(res);
+        this.response = data.result;
+        console.log(res);
       },
       err => {
-          console.log(err);
+        console.log(err);
       }
-  )
+    )
   }
 
 }

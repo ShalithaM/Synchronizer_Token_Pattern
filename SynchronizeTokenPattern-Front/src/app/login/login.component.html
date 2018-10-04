@@ -1,10 +1,16 @@
-  <div class="login-block">
-            <h1>Login</h1>
-            <div class="form-group">
-            <input type="text" [(ngModel)]="userdetails.username" value="" placeholder="Username" id="username" />
-            </div>
-            <div class="form-group">
-            <input type="password" [(ngModel)]="userdetails.password" value="" placeholder="Password" id="password" />
-          </div>
-            <button (click)="login()">Submit</button>
-        </div>
+<div class="login-block">
+  <h1>Login</h1>
+  <div class="form-group">
+    <input type="text" [(ngModel)]="userdetails.username" value="" placeholder="Username" id="username" />
+  </div>
+  <div class="form-group">
+    <input type="password" [(ngModel)]="userdetails.password" value="" placeholder="Password" id="password" />
+  </div>
+  <div *ngIf="auth" class="form-group">
+    <label>*Authentication Failed</label>
+  </div>
+  <br />
+  <div class="form-group">
+    <button (click)="login()">Submit</button>
+  </div>
+</div>
